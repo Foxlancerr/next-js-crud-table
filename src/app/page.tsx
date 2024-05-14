@@ -14,7 +14,7 @@ export default function Home() {
 
     const form = new FormData(event.currentTarget);
 
-    const formData = {};
+    const formData:Record<string, string> = {}
     for (let [key, value] of form) {
       (formData as any)[key] =
         value === ""
