@@ -46,7 +46,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex justify-center bg-slate-200 rounded-sm w-4/5 mx-auto my-20 p-5 relative">
+    <main className="flex justify-center bg-slate-200 rounded-sm w-[95%] md:w-4/5 mx-auto my-10 md:my-20 md:p-5 relative">
       {/* dialog box */}
 
       {dailogBoxOpen && (

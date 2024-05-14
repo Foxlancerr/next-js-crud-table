@@ -32,7 +32,7 @@ function Table({
     setDailogBoxOpen(true);
     setSelectedBoxId(id);
   }
-  
+
   function onDelete(id: number) {
     setProductList((prev) => {
       return prev.filter((prod) => prod.id !== id);
@@ -40,15 +40,15 @@ function Table({
   }
   return (
     <div className="w-full flex flex-col relative">
-      <div className="grid grid-cols-6 rounded-sm justify-between items-center py-3 px-5 bg-gray-700 text-white">
-        <h1>#</h1>
+      <div className="grid md:grid-cols-6 grid-cols-5 rounded-sm md:justify-between justify-start items-center md:py-3 md:px-5 py-2 px-2 bg-gray-700 text-white md:text-lg text-[12px]">
+        <h1 className="hidden md:block">#</h1>
         <h1>Product Name</h1>
-        <h1>category</h1>
-        <h1>price</h1>
-        <h1>pending</h1>
+        <h1>Category</h1>
+        <h1>Price</h1>
+        <h1 className="mx-auto">Status</h1>
         <div className="flex gap-3 ml-auto">
-          <h1>Edit</h1>
-          <h1>delete</h1>
+          <h1>Action</h1>
+          
         </div>
       </div>
 
@@ -57,14 +57,14 @@ function Table({
         {productList.map((product: IProduct) => (
           <div
             key={product.id}
-            className="border-b-2 border-black/5 py-3 px-5 grid grid-cols-6 text-sm gap-y-3 justify-between items-center"
+            className="border-b-2 text-[10px] md:text-sm  border-black/5 last:border-none md:py-3 py-1  md:px-5 px-2 grid grid-cols-6 text-sm gap-y-3 justify-between items-center"
           >
-            <h4>{product.id}</h4>
+            <h4 className="hidden md:block">{product.id}</h4>
             <h4>{product["Product Name"]}</h4>
-            <h4>{product.category}</h4>
-            <h4>{product.price}</h4>
+            <h4  className="md:m-0 mx-auto">{product.category}</h4>
+            <h4 className="md:m-0 mx-auto">{product.price}</h4>
             <h4
-              className={`w-max rounded-full text-center py-2 px-3 
+              className={` rounded-full mx-auto text-center py-2 px-3 
                         ${product.status === "complete" && "bg-green-300"}
                         ${product.status === "pending" && "bg-orange-300"}
                         ${
@@ -75,7 +75,7 @@ function Table({
             >
               {product.status}
             </h4>
-            <div className="flex gap-3 items-end ml-auto">
+            <div className="flex md:gap-y-2 gap-1 ml-auto justify-end">
               <h4
                 className="w-max bg-green-400 text-black rounded-full p-2 text-lg hover:bg-green-800 cursor-pointer duration-100 transition-all hover:text-white"
                 onClick={() => {
@@ -95,7 +95,7 @@ function Table({
             </div>
           </div>
         ))}
-        <div className="flex py-3 rounded-sm items-center bg-blue-200 mt-3 px-5 justify-between text-sm">
+        <div className="flex py-3 rounded-sm items-center bg-blue-400 text-white md:px-5 px-1 justify-between text-sm">
           <h1 className="text-xl font-semibold">Total</h1>
           <h1>{calculateTotalAmount()}</h1>
         </div>
