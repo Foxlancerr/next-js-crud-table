@@ -1,4 +1,4 @@
-const enum EStatus {
+export const enum EStatus {
     PENDING = 'pending',
     COMPLETE = 'complete',
     CLOSE = 'close'
