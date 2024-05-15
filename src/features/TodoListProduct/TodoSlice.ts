@@ -41,7 +41,7 @@ export const productSlice = createSlice({
       console.log("called create product successfully");
       state.productsListArr.push({
         ...action.payload.newDialogBoxProductFormData,
-        id: state.productsListArr.length + 1,
+        id: state.productsListArr.length,
         price:Number(action.payload.newDialogBoxProductFormData.price)
       });
     },
