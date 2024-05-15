@@ -7,9 +7,8 @@ import { FaPlus } from "react-icons/fa6";
 
 export default function Home() {
   const [productList, setProductList] = useState(productsListArr);
-  const [dialogBoxFormData, setDialogBoxFormData] = useState<Partial<IProduct>>(
-    {}
-  );
+  const [dialogBoxFormData, setDialogBoxFormData] =
+    useState<Partial<IProduct> | null>({});
   const [dailogBoxOpen, setDailogBoxOpen] = useState(false);
   const [selectedBoxId, setSelectedBoxId] = useState<null | number>(null);
 
@@ -18,7 +17,7 @@ export default function Home() {
 
     const form = new FormData(event.currentTarget);
 
-    const formData:Record<string, string> = {}
+    const formData: Record<string, string> = {};
     for (let [key, value] of form) {
       (formData as any)[key] =
         value === ""
@@ -28,27 +27,29 @@ export default function Home() {
           : value;
     }
 
-    
+    const index = productList.findIndex(
+      (product) => product.id === selectedBoxId
+    );
+    if (index !== -1) {
+      setProductList((prev) => {
+        const updatedProductList = [...prev];
 
-    setProductList((prev) => {
-      const updatedProductList = [...prev];
-      const index = updatedProductList.findIndex(
-        (product) => product.id === selectedBoxId
-      );
-      if (index !== -1) {
         updatedProductList[index] = {
           ...updatedProductList[index],
           ...formData,
-          price:Number(formData.price)
+          price: Number(formData.price),
         };
-      }
 
-      return updatedProductList;
-    });
+        return updatedProductList;
+      });
+    } else {
+      setProductList((prev) => {
+        
+      });
+    }
 
     setDailogBoxOpen(false);
   }
-
 
   return (
     <main className="flex justify-center bg-slate-100 rounded-sm w-[95%] md:w-4/5 mx-auto my-10 md:my-20 md:p-5 relative">
@@ -73,6 +74,7 @@ export default function Home() {
       )}
       <Table
         setSelectedBoxId={setSelectedBoxId}
+        selectedBoxId={selectedBoxId}
         setDailogBoxOpen={setDailogBoxOpen}
         setDialogBoxFormData={setDialogBoxFormData}
         productList={productList}

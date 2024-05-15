@@ -14,7 +14,7 @@ export interface IProduct {
 
 export const productsListArr: IProduct[] = [
     {
-        id: 1,
+        id: 0,
         "Product Name": "Smartphone",
         "category": "Electronics",
         "price": 599,
@@ -22,7 +22,7 @@ export const productsListArr: IProduct[] = [
 
     },
     {
-        id: 2,
+        id: 1,
         "Product Name": "Laptop",
         "category": "Electronics",
         "price": 899,
@@ -30,7 +30,7 @@ export const productsListArr: IProduct[] = [
 
     },
     {
-        id: 3,
+        id: 2,
         "Product Name": "Desk Chair",
         "category": "Furniture",
         "price": 149,
@@ -38,7 +38,7 @@ export const productsListArr: IProduct[] = [
 
     },
     {
-        id: 4,
+        id: 3,
         "Product Name": "Running Shoes",
         "category": "Footwear",
         "price": 79,
@@ -46,7 +46,7 @@ export const productsListArr: IProduct[] = [
 
     },
     {
-        id: 5,
+        id: 4,
         "Product Name": "Digital Camera",
         "category": "Electronics",
         "price": 399,
@@ -54,7 +54,7 @@ export const productsListArr: IProduct[] = [
 
     },
     {
-        id: 6,
+        id: 5,
         "Product Name": "Coffee Maker",
         "category": "Appliances",
         "price": 49,
@@ -62,7 +62,7 @@ export const productsListArr: IProduct[] = [
 
     },
     {
-        id: 7,
+        id: 6,
         "Product Name": "TV Stand",
         "category": "Furniture",
         "price": 199,
@@ -70,7 +70,7 @@ export const productsListArr: IProduct[] = [
 
     },
     {
-        id: 8,
+        id: 7,
         "Product Name": "Headphones",
         "category": "Electronics",
         "price": 129,
@@ -78,7 +78,7 @@ export const productsListArr: IProduct[] = [
 
     },
     {
-        id: 9,
+        id: 8,
         "Product Name": "Backpack",
         "category": "Bags",
         "price": 59,
@@ -86,12 +86,11 @@ export const productsListArr: IProduct[] = [
 
     },
     {
-        id: 10,
+        id: 9,
         "Product Name": "Desk Lamp",
         "category": "Home Decor",
         "price": 29,
         status: EStatus.CLOSE,
-
     }
 ];
 
