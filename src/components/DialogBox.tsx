@@ -39,7 +39,7 @@ function DialogBox({
   return (
     <div className="flex flex-col justify-center items-center h-screen w-full bg-white z-10 top-0 left-0 fixed">
       <span
-        className="text-4xl cursor-pointer absolute right-5 top-5"
+        className="sm:text-4xl text-2xl cursor-pointer absolute right-5 top-5"
         onClick={() => {
           setDialogBoxFormData(null);
           dispatch(dialogBoxClose());
@@ -51,7 +51,7 @@ function DialogBox({
       <form
         onSubmit={handleSave}
         id="product-form"
-        className="bg-slate-200 py-10 px-10 rounded-lg w-2/5 flex flex-col gap-y-3 "
+        className="bg-slate-200 md:py-10 py-3 md:px-10 px-3 rounded-lg md:w-2/5 w-[90%] flex flex-col gap-y-3 "
       >
         <InputBox
           onChange={handleInputChange}
@@ -100,12 +100,12 @@ function DialogBox({
               setDialogBoxFormData(null);
               dispatch(dialogBoxClose());
             }}
-            className="text-lg px-2 flex-grow rounded-full py-2 bg-red-400 text-black hover:bg-red-800 hover:text-white duration-100"
+            className="sm:text-lg text-md md:px-2 px-6 md:flex-grow rounded-full py-2  bg-red-400 text-black hover:bg-red-800 hover:text-white duration-100"
           >
             close
           </button>
           <button
-            className="text-lg px-2 py-2 rounded-full flex-grow bg-green-400 text-black hover:bg-green-800 hover:text-white duration-10"
+            className="sm:text-lg text-md md:px-2 px-6 py-2 rounded-full md:flex-grow bg-green-400 text-black hover:bg-green-800 hover:text-white duration-10"
             type="submit"
           >
             Save
