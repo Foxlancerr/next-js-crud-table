@@ -10,12 +10,14 @@ interface ITableProps {
   productList: IProduct[];
   setSelectedBoxId: Dispatch<SetStateAction<number | null>>;
   setProductList: Dispatch<SetStateAction<IProduct[]>>;
+  setDialogBoxFormData: React.Dispatch<React.SetStateAction<IProduct | null>>;
 }
 function Table({
   setDailogBoxOpen,
   setSelectedBoxId,
   productList,
   setProductList,
+  setDialogBoxFormData,
 }: ITableProps) {
   //   const [productList, setProductList] = useState(productsListArr);
   function calculateTotalAmount() {
@@ -48,7 +50,6 @@ function Table({
         <h1 className="mx-auto">Status</h1>
         <div className="flex gap-3 ml-auto">
           <h1>Action</h1>
-          
         </div>
       </div>
 
@@ -61,7 +62,7 @@ function Table({
           >
             <h4 className="hidden md:block">{product.id}</h4>
             <h4>{product["Product Name"]}</h4>
-            <h4  className="md:m-0 mx-auto">{product.category}</h4>
+            <h4 className="md:m-0 mx-auto">{product.category}</h4>
             <h4 className="md:m-0 mx-auto">{product.price}</h4>
             <h4
               className={` rounded-full mx-auto text-center py-2 px-3 
@@ -80,6 +81,7 @@ function Table({
                 className="w-max bg-green-400 text-black rounded-full p-2 text-lg hover:bg-green-800 cursor-pointer duration-100 transition-all hover:text-white"
                 onClick={() => {
                   onEdit(product.id);
+                  setDialogBoxFormData(productList[product.id]);
                 }}
               >
                 <MdEdit></MdEdit>

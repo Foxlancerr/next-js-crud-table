@@ -6,15 +6,18 @@ import { IProduct, productsListArr } from "@/assets/constant";
 
 export default function Home() {
   const [productList, setProductList] = useState(productsListArr);
+  const [dialogBoxFormData, setDialogBoxFormData] = useState<null | IProduct>(
+    null
+  );
   const [dailogBoxOpen, setDailogBoxOpen] = useState(false);
   const [selectedBoxId, setSelectedBoxId] = useState<null | number>(null);
-
+  console.log(dialogBoxFormData);
   function handleSave(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const form = new FormData(event.currentTarget);
 
-    const formData:Record<string, string> = {}
+    const formData: Record<string, string> = {};
     for (let [key, value] of form) {
       (formData as any)[key] =
         value === ""
@@ -35,7 +38,7 @@ export default function Home() {
         updatedProductList[index] = {
           ...updatedProductList[index],
           ...formData,
-          price:Number(formData.price)
+          price: Number(formData.price),
         };
       }
 
@@ -51,6 +54,8 @@ export default function Home() {
 
       {dailogBoxOpen && (
         <DialogBox
+          dialogBoxFormData={dialogBoxFormData}
+          setDialogBoxFormData={setDialogBoxFormData}
           setDailogBoxOpen={setDailogBoxOpen}
           handleSave={handleSave}
         />
@@ -58,6 +63,7 @@ export default function Home() {
       <Table
         setSelectedBoxId={setSelectedBoxId}
         setDailogBoxOpen={setDailogBoxOpen}
+        setDialogBoxFormData={setDialogBoxFormData}
         productList={productList}
         setProductList={setProductList}
       ></Table>
