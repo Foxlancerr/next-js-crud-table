@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { dialogBoxClose } from "@/features/DialogBox/DialogBoxSlice";
 
 interface IDialogBoxProps {
-  setDailogBoxOpen: (id: boolean) => void;
   handleSave: (event: React.FormEvent<HTMLFormElement>) => void;
   setDialogBoxFormData: React.Dispatch<
     React.SetStateAction<Partial<IProduct> | null>
@@ -17,7 +16,6 @@ interface IDialogBoxProps {
   dialogBoxFormData: Partial<IProduct> | null;
 }
 function DialogBox({
-  setDailogBoxOpen,
   handleSave,
   dialogBoxFormData,
   setDialogBoxFormData,

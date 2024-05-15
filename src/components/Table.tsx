@@ -13,9 +13,6 @@ import DialogBox from "./DialogBox";
 import { dialogBoxOpen } from "@/features/DialogBox/DialogBoxSlice";
 
 interface ITableProps {
-  setDailogBoxOpen: (id: boolean) => void;
-  productList: IProduct[];
-  setProductList: Dispatch<SetStateAction<IProduct[]>>;
   selectedBoxId: number | null;
   setSelectedBoxId: Dispatch<SetStateAction<number | null>>;
   setDialogBoxFormData: React.Dispatch<
@@ -23,11 +20,9 @@ interface ITableProps {
   >;
 }
 function Table({
-  setDailogBoxOpen,
   setSelectedBoxId,
-  selectedBoxId,
-  //   productList,
   setDialogBoxFormData,
+  selectedBoxId
 }: ITableProps) {
   const dispatch = useDispatch<AppDispatch>();
   const productList = useSelector(
@@ -54,6 +49,7 @@ function Table({
 
   function onDelete(id: number) {
     dispatch(deleteProductFromList(id));
+    console.log(selectedBoxId)
   }
 
   return (
@@ -97,7 +93,7 @@ function Table({
               <h4
                 className="w-max bg-green-400 text-black rounded-full p-2 text-lg hover:bg-green-800 cursor-pointer duration-100 transition-all hover:text-white"
                 onClick={() => {
-                  onEdit(product.id);
+                  onEdit(index);
                 }}
               >
                 <MdEdit></MdEdit>
