@@ -2,6 +2,7 @@ import React from "react";
 
 interface IInputBoxProps {
   label: string;
+  InputName:string;
   placeHolder: string;
   inputType: string;
   value: string | number;
@@ -12,6 +13,7 @@ function InputBox({
   inputType,
   placeHolder,
   value,
+  InputName,
   onChange,
 }: IInputBoxProps) {
   return (
@@ -24,7 +26,7 @@ function InputBox({
         value={value}
         onChange={onChange}
         placeholder={placeHolder}
-        name={label}
+        name={InputName}
         id={label}
         className="outline-none text-sm soutline-none border-none py-2 rounded-md px-3"
       />

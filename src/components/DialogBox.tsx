@@ -3,36 +3,47 @@ import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import InputBox from "./InputBox";
 import { IoClose } from "react-icons/io5";
 import { IProduct, productsListArr } from "@/assets/constant";
+import { FaPlus } from "react-icons/fa6";
 
 interface IDialogBoxProps {
   setDailogBoxOpen: (id: boolean) => void;
   handleSave: (event: React.FormEvent<HTMLFormElement>) => void;
-  setDialogBoxFormData: React.Dispatch<React.SetStateAction<IProduct | null>>
-  dialogBoxFormData:IProduct | null
+  setDialogBoxFormData: React.Dispatch<React.SetStateAction<IProduct | null>>;
+  dialogBoxFormData: IProduct | null;
 }
-function DialogBox({ setDailogBoxOpen, handleSave,dialogBoxFormData,setDialogBoxFormData }: IDialogBoxProps) {
-
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type, checked } = event.target;
-    setDialogBoxFormData(prevState => {
-      if (!prevState) return prevState;
-      return {
+function DialogBox({
+  setDailogBoxOpen,
+  handleSave,
+  dialogBoxFormData,
+  setDialogBoxFormData,
+}: IDialogBoxProps) {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+    setDialogBoxFormData((prevState) => {
+      const newState = {
         ...prevState,
-        [name]: type === 'checkbox' ? checked : value,
+        [name]: value,
       };
+      return newState;
     });
+   
   };
-  
 
+  console.log(dialogBoxFormData)
   return (
     <div className="flex flex-col justify-center items-center h-screen w-full bg-white z-10 top-0 left-0 fixed">
       <span
         className="text-4xl cursor-pointer absolute right-5 top-5"
-        onClick={() => setDailogBoxOpen(false)}
+        onClick={() => {
+          setDialogBoxFormData(null);
+          setDailogBoxOpen(false);
+        }}
       >
         <IoClose></IoClose>
       </span>
+
       <form
         onSubmit={handleSave}
         id="product-form"
@@ -40,21 +51,24 @@ function DialogBox({ setDailogBoxOpen, handleSave,dialogBoxFormData,setDialogBox
       >
         <InputBox
           onChange={handleInputChange}
-          value={dialogBoxFormData?.["Product Name"]}
+          InputName="Product Name"
+          value={dialogBoxFormData?.["Product Name"] || ""}
           inputType="text"
           label="Product Name"
           placeHolder="Edit your product name..."
         ></InputBox>
         <InputBox
-         onChange={handleInputChange}
-         value={dialogBoxFormData?.category}
+          InputName="category"
+          onChange={handleInputChange}
+          value={dialogBoxFormData?.category || ""}
           inputType="text"
           label="category"
           placeHolder="Edit your product category..."
         ></InputBox>
         <InputBox
-         onChange={handleInputChange}
-         value={dialogBoxFormData?.price}
+          InputName="price"
+          onChange={handleInputChange}
+          value={dialogBoxFormData?.price || ""}
           inputType="number"
           label="price"
           placeHolder="Edit your product price..."
@@ -64,13 +78,12 @@ function DialogBox({ setDailogBoxOpen, handleSave,dialogBoxFormData,setDialogBox
           name="status"
           id="status"
           onChange={handleInputChange}
-          value={dialogBoxFormData?.status}
+          value={dialogBoxFormData?.status || ""}
           className="outline-none mt-4 text-sm soutline-none border-none py-3 rounded-md px-3"
         >
           {["pending", "complete", "close"].map((st) => {
             return (
-              <option key={st} value={st
-              } className="">
+              <option key={st} value={st} className="">
                 {st.toUpperCase()}
               </option>
             );
@@ -79,7 +92,10 @@ function DialogBox({ setDailogBoxOpen, handleSave,dialogBoxFormData,setDialogBox
 
         <div className="flex justify-between items-center gap-5 mt-3">
           <button
-            onClick={() => setDailogBoxOpen(false)}
+            onClick={() => {
+              setDialogBoxFormData(null);
+              setDailogBoxOpen(false);
+            }}
             className="text-lg px-2 flex-grow rounded-full py-2 bg-red-400 text-black hover:bg-red-800 hover:text-white duration-100"
           >
             close

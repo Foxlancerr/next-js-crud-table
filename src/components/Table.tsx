@@ -4,6 +4,7 @@ import { MdEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 
 import { Dispatch, SetStateAction, useState } from "react";
+import { FaPlus } from "react-icons/fa6";
 
 interface ITableProps {
   setDailogBoxOpen: (id: boolean) => void;
@@ -42,6 +43,9 @@ function Table({
   }
   return (
     <div className="w-full flex flex-col relative">
+      <div>
+       
+      </div>
       <div className="grid md:grid-cols-6 grid-cols-5 rounded-sm md:justify-between justify-start items-center md:py-3 md:px-5 py-2 px-2 bg-gray-700 text-white md:text-lg text-[12px]">
         <h1 className="hidden md:block">#</h1>
         <h1>Product Name</h1>
@@ -55,33 +59,33 @@ function Table({
 
       {/* tbody */}
       <div>
-        {productList.map((product: IProduct) => (
+        {productList?.map((product: IProduct) => (
           <div
-            key={product.id}
+            key={product?.id}
             className="border-b-2 text-[10px] md:text-sm  border-black/5 last:border-none md:py-3 py-1  md:px-5 px-2 grid grid-cols-6 text-sm gap-y-3 justify-between items-center"
           >
-            <h4 className="hidden md:block">{product.id}</h4>
+            <h4 className="hidden md:block">{product?.id}</h4>
             <h4>{product["Product Name"]}</h4>
-            <h4 className="md:m-0 mx-auto">{product.category}</h4>
-            <h4 className="md:m-0 mx-auto">{product.price}</h4>
+            <h4 className="md:m-0 mx-auto">{product?.category}</h4>
+            <h4 className="md:m-0 mx-auto">{product?.price}</h4>
             <h4
               className={` rounded-full mx-auto text-center py-2 px-3 
-                        ${product.status === "complete" && "bg-green-300"}
-                        ${product.status === "pending" && "bg-orange-300"}
+                        ${product?.status === "complete" && "bg-green-300"}
+                        ${product?.status === "pending" && "bg-orange-300"}
                         ${
-                          product.status === "close" &&
+                          product?.status === "close" &&
                           "bg-red-200 line-through"
                         }
                         `}
             >
-              {product.status}
+              {product?.status}
             </h4>
             <div className="flex md:gap-y-2 gap-1 ml-auto justify-end">
               <h4
                 className="w-max bg-green-400 text-black rounded-full p-2 text-lg hover:bg-green-800 cursor-pointer duration-100 transition-all hover:text-white"
                 onClick={() => {
-                  onEdit(product.id);
-                  setDialogBoxFormData(productList[product.id]);
+                  onEdit(product?.id);
+                  setDialogBoxFormData(productList?.[product?.id]);
                 }}
               >
                 <MdEdit></MdEdit>
