@@ -1,17 +1,23 @@
-"use client";
+// "use client";
 import { IProduct, productsListArr } from "@/assets/constant";
 import { MdEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
+import { UseDispatch, useDispatch, useSelector } from "react-redux";
 
 import { Dispatch, SetStateAction, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
+import { AppDispatch, RootState } from "@/store/store";
+import { deleteProductFromList } from "@/features/TodoListProduct/TodoSlice";
+// import { dialogBoxOpen } from "@/features/DialogBox/DialogBoxSlice";
+import DialogBox from "./DialogBox";
+import { dialogBoxOpen } from "@/features/DialogBox/DialogBoxSlice";
 
 interface ITableProps {
   setDailogBoxOpen: (id: boolean) => void;
   productList: IProduct[];
+  setProductList: Dispatch<SetStateAction<IProduct[]>>;
   selectedBoxId: number | null;
   setSelectedBoxId: Dispatch<SetStateAction<number | null>>;
-  setProductList: Dispatch<SetStateAction<IProduct[]>>;
   setDialogBoxFormData: React.Dispatch<
     React.SetStateAction<Partial<IProduct> | null>
   >;
@@ -20,11 +26,14 @@ function Table({
   setDailogBoxOpen,
   setSelectedBoxId,
   selectedBoxId,
-  productList,
-  setProductList,
+  //   productList,
   setDialogBoxFormData,
 }: ITableProps) {
-  //   const [productList, setProductList] = useState(productsListArr);
+  const dispatch = useDispatch<AppDispatch>();
+  const productList = useSelector(
+    (state: RootState) => state.productReducer.productsListArr
+  );
+
   function calculateTotalAmount() {
     const calculateTotalsPrice: number = productList.reduce(
       (acc: number, current: IProduct) => {
@@ -36,16 +45,17 @@ function Table({
   }
 
   function onEdit(id: number) {
-    setDailogBoxOpen(true);
+    console.log(id);
+    dispatch(dialogBoxOpen());
+    console.log(DialogBox, productList);
     setDialogBoxFormData(productList?.[id]);
     setSelectedBoxId(id);
   }
 
   function onDelete(id: number) {
-    setProductList((prev) => {
-      return prev.filter((prod) => prod.id !== id);
-    });
+    dispatch(deleteProductFromList(id));
   }
+
   return (
     <div className="w-full flex flex-col relative">
       <div></div>

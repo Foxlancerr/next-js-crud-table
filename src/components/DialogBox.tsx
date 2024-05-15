@@ -4,11 +4,16 @@ import InputBox from "./InputBox";
 import { IoClose } from "react-icons/io5";
 import { IProduct, productsListArr } from "@/assets/constant";
 import { FaPlus } from "react-icons/fa6";
+import { RootState } from "@/store/store";
+import { useDispatch } from "react-redux";
+import { dialogBoxClose } from "@/features/DialogBox/DialogBoxSlice";
 
 interface IDialogBoxProps {
   setDailogBoxOpen: (id: boolean) => void;
   handleSave: (event: React.FormEvent<HTMLFormElement>) => void;
-  setDialogBoxFormData: React.Dispatch<React.SetStateAction<Partial<IProduct> | null>>;
+  setDialogBoxFormData: React.Dispatch<
+    React.SetStateAction<Partial<IProduct> | null>
+  >;
   dialogBoxFormData: Partial<IProduct> | null;
 }
 function DialogBox({
@@ -17,29 +22,29 @@ function DialogBox({
   dialogBoxFormData,
   setDialogBoxFormData,
 }: IDialogBoxProps) {
+  // redux
+  const dispatch = useDispatch();
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
     setDialogBoxFormData((prevState) => {
-      if(!prevState) return prevState
+      if (!prevState) return prevState;
       const newState = {
         ...prevState,
         [name]: value,
       };
       return newState;
     });
-   
   };
 
-  console.log(dialogBoxFormData)
   return (
     <div className="flex flex-col justify-center items-center h-screen w-full bg-white z-10 top-0 left-0 fixed">
       <span
         className="text-4xl cursor-pointer absolute right-5 top-5"
         onClick={() => {
           setDialogBoxFormData(null);
-          setDailogBoxOpen(false);
+          dispatch(dialogBoxClose());
         }}
       >
         <IoClose></IoClose>
@@ -95,7 +100,7 @@ function DialogBox({
           <button
             onClick={() => {
               setDialogBoxFormData(null);
-              setDailogBoxOpen(false);
+              dispatch(dialogBoxClose());
             }}
             className="text-lg px-2 flex-grow rounded-full py-2 bg-red-400 text-black hover:bg-red-800 hover:text-white duration-100"
           >
