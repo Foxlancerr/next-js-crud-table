@@ -21,8 +21,8 @@ export const productSlice = createSlice({
       state,
       action: PayloadAction<{ uniqueId: number; productUpdatedData: IProduct }>
     ) => {
-      console.log(action.payload.productUpdatedData)
-      console.log("update product successfully")
+      console.log(action.payload.productUpdatedData);
+      console.log("update product successfully");
       const updateProductIndex = state.productsListArr.findIndex(
         (product) => product.id === action.payload.uniqueId
       );
@@ -30,6 +30,7 @@ export const productSlice = createSlice({
         state.productsListArr[updateProductIndex] = {
           ...state.productsListArr[updateProductIndex],
           ...action.payload.productUpdatedData,
+          price: Number(state.productsListArr[updateProductIndex].price),
         };
       }
     },
@@ -37,10 +38,11 @@ export const productSlice = createSlice({
       state,
       action: PayloadAction<{ newDialogBoxProductFormData: IProduct }>
     ) => {
-      console.log("called create product successfully")
+      console.log("called create product successfully");
       state.productsListArr.push({
         ...action.payload.newDialogBoxProductFormData,
         id: state.productsListArr.length + 1,
+        price:Number(action.payload.newDialogBoxProductFormData.price)
       });
     },
   },

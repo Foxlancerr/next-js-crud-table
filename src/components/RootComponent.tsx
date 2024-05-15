@@ -50,6 +50,7 @@ export default function RootComponent() {
 
     dispatch(dialogBoxClose());
     setDialogBoxFormData({})
+    setSelectedBoxId(null)
   }
 
   return (
