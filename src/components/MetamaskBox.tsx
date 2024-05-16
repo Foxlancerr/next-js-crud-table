@@ -28,7 +28,11 @@ export default function MetamaskBox() {
           onClick={() => {
             connectMetaMask().then((account) => {
               dispatch(metamaskBoxCloseHandlar());
-              alert("connection successfull" + account);
+              if (account) {
+                alert("connection successfull" + account);
+              } else {
+                alert("Something went wrong");
+              }
             });
           }}
           className={`group flex gap-x-2 flex-grow border-2 w-full p-3 bg-[#F5F7FB]  border-black/10 items-center justify-between cursor-pointer hover:bg-slate-200 rounded-md duration-150`}
