@@ -52,7 +52,7 @@ function Table({
   }
 
   return (
-    <div className="w-full flex flex-col relative">
+    <div className="w-full flex flex-col relative mt-12">
     
       <div className="grid md:grid-cols-6 grid-cols-5 rounded-sm md:justify-between justify-start items-center md:py-3 md:px-5 py-2 px-2 bg-gray-700 text-white md:text-lg text-[12px]">
         <h1 className="hidden md:block">#</h1>

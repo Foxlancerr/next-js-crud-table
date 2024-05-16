@@ -59,7 +59,7 @@ export default function RootComponent() {
           console.log(selectedBoxId)
           dispatch(dialogBoxOpen());
         }}
-        className="absolute -top-16 right-0 flex gap-x-2 items-center cursor-pointer border-blue-800/10 border-[1px] bg-slate-100 px-5 py-2 rounded-full"
+        className="absolute -top-4 right-0 flex gap-x-2 items-center cursor-pointer border-blue-800/10 border-[1px] bg-slate-100 px-5 py-2 rounded-full"
       >
         <h1 className="text-lg font-semibold text-blue-500">Create New</h1>
         <span className="text-[15px] rounded-full p-2 bg-blue-500 text-white">
