@@ -1,6 +1,6 @@
+import { IProduct } from "@/types/ProductList.type";
 import { productsListArr } from "./../../assets/constant";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IProduct } from "@/assets/constant";
 
 const initialState = {
   productsListArr,
@@ -42,7 +42,7 @@ export const productSlice = createSlice({
       state.productsListArr.push({
         ...action.payload.newDialogBoxProductFormData,
         id: state.productsListArr.length,
-        price:Number(action.payload.newDialogBoxProductFormData.price)
+        price: Number(action.payload.newDialogBoxProductFormData.price),
       });
     },
   },
