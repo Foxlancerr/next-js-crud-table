@@ -1,9 +1,5 @@
 "use client";
-import Table from "@/components/Table";
-import DialogBox from "@/components/DialogBox";
 import { useState } from "react";
-import { EStatus, IProduct, productsListArr } from "@/assets/constant";
-import { FaPlus } from "react-icons/fa6";
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,6 +11,11 @@ import {
   updateProductAtList,
 } from "@/features/TodoListProduct/TodoSlice";
 
+import { FaPlus } from "react-icons/fa6";
+import Table from "@/components/Table";
+import DialogBox from "@/components/DialogBox";
+import { IProduct } from "@/types/ProductList.type";
+
 export default function RootComponent() {
   const [dialogBoxFormData, setDialogBoxFormData] =
     useState<Partial<IProduct> | null>({});
@@ -25,10 +26,6 @@ export default function RootComponent() {
   const boxModel = useSelector(
     (state: RootState) => state.dialogBoxReducer.dialogModelBox
   );
-  const productList = useSelector(
-    (state: RootState) => state.productReducer.productsListArr
-  );
-
   
   function handleSave(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
