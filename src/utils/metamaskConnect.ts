@@ -20,12 +20,3 @@ export const connectMetaMask = async () => {
     console.log(error);
   }
 };
-export const disConnectMetaMask = async () => {
-  try {
-    const provider = new ethers.BrowserProvider((window as any).ethereum);
-    const accounts = await provider.send("eth_requestAccounts", []);
-    const account = accounts[0];
-  } catch (error) {
-    console.log(error);
-  }
-};
