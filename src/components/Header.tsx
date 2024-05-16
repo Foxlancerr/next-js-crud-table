@@ -1,11 +1,20 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import MetamaskIcon from "@/assets/icons/metamask.svg";
-import MenuList from "./MenuList";
+import { hasMetaMaskInstall } from "@/utils/metamaskConnect";
+import { useDispatch, useSelector } from "react-redux";
+import { metamaskBoxOpenHandlar } from "@/features/MetamaskBox/metaMaskBoxSlice";
+import { RootState } from "@/store/store";
 
 function Header() {
-  const [metamaskMenuOpen, setMetaMaskMenuOpen] = useState<boolean>(false);
+ 
+  const dispatch = useDispatch();
+
+  // check that metamask is installed or not
+  useEffect(() => {
+    hasMetaMaskInstall();
+  }, []);
 
   return (
     <nav className="py-2 px-10 bg-gray-700 text-white z-20 sticky top-0 left-0 flex justify-between items-center">
@@ -13,15 +22,13 @@ function Header() {
 
       <div
         className="p-3 relative rounded-full bg-white/5"
-        onClick={() => setMetaMaskMenuOpen((prev) => !metamaskMenuOpen)}
+        onClick={() => dispatch(metamaskBoxOpenHandlar())}
       >
         <Image
           src={MetamaskIcon}
           alt="Metamask-icon"
           className="w-7 h-7 cursor-pointer object-cover"
         ></Image>
-
-        {metamaskMenuOpen && <MenuList></MenuList>}
       </div>
     </nav>
   );

@@ -15,8 +15,12 @@ import { FaPlus } from "react-icons/fa6";
 import Table from "@/components/Table";
 import DialogBox from "@/components/DialogBox";
 import { IProduct } from "@/types/ProductList.type";
+import MetamaskBox from "./MetamaskBox";
 
 export default function RootComponent() {
+  const isMetaMaskBoxOpen = useSelector(
+    (state: RootState) => state.metaMaskBoxReducer.isBoxOpen
+  );
   const [dialogBoxFormData, setDialogBoxFormData] =
     useState<Partial<IProduct> | null>({});
   const [selectedBoxId, setSelectedBoxId] = useState<null | number>(null);
@@ -26,7 +30,7 @@ export default function RootComponent() {
   const boxModel = useSelector(
     (state: RootState) => state.dialogBoxReducer.dialogModelBox
   );
-  
+
   function handleSave(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -46,8 +50,8 @@ export default function RootComponent() {
     }
 
     dispatch(dialogBoxClose());
-    setDialogBoxFormData({})
-    setSelectedBoxId(null)
+    setDialogBoxFormData({});
+    setSelectedBoxId(null);
   }
 
   return (
@@ -56,7 +60,7 @@ export default function RootComponent() {
 
       <div
         onClick={() => {
-          console.log(selectedBoxId)
+          console.log(selectedBoxId);
           dispatch(dialogBoxOpen());
         }}
         className="absolute -top-4 right-0 flex gap-x-2 items-center cursor-pointer border-blue-800/10 border-[1px] bg-slate-100 px-5 py-2 rounded-full"
@@ -74,7 +78,7 @@ export default function RootComponent() {
           handleSave={handleSave}
         />
       )}
-
+      {isMetaMaskBoxOpen && <MetamaskBox />}
       <Table
         selectedBoxId={selectedBoxId}
         setSelectedBoxId={setSelectedBoxId}
