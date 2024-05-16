@@ -1,16 +1,15 @@
 // "use client";
-import { IProduct, productsListArr } from "@/assets/constant";
+import { deleteProductFromList } from "@/features/TodoListProduct/TodoSlice";
+import { dialogBoxOpen } from "@/features/DialogBox/DialogBoxSlice";
+import {  useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
+import type { IProduct } from "@/types/ProductList.type";
+import type { Dispatch, SetStateAction } from "react";
+
+import DialogBox from "./DialogBox";
+
 import { MdEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
-import { UseDispatch, useDispatch, useSelector } from "react-redux";
-
-import { Dispatch, SetStateAction, useState } from "react";
-import { FaPlus } from "react-icons/fa6";
-import { AppDispatch, RootState } from "@/store/store";
-import { deleteProductFromList } from "@/features/TodoListProduct/TodoSlice";
-// import { dialogBoxOpen } from "@/features/DialogBox/DialogBoxSlice";
-import DialogBox from "./DialogBox";
-import { dialogBoxOpen } from "@/features/DialogBox/DialogBoxSlice";
 
 interface ITableProps {
   selectedBoxId: number | null;
@@ -53,8 +52,8 @@ function Table({
   }
 
   return (
-    <div className="w-full flex flex-col relative">
-      <div></div>
+    <div className="w-full flex flex-col relative mt-12">
+    
       <div className="grid md:grid-cols-6 grid-cols-5 rounded-sm md:justify-between justify-start items-center md:py-3 md:px-5 py-2 px-2 bg-gray-700 text-white md:text-lg text-[12px]">
         <h1 className="hidden md:block">#</h1>
         <h1>Product Name</h1>
@@ -67,11 +66,11 @@ function Table({
       </div>
 
       {/* tbody */}
-      <div>
+      <div className="w-full">
         {productList?.map((product: IProduct, index: number) => (
           <div
             key={product?.id}
-            className="border-b-2 text-[10px] md:text-sm  border-black/5 last:border-none md:py-3 py-1  md:px-5 px-2 grid grid-cols-6 text-sm gap-y-3 justify-between items-center"
+            className="border-b-2 text-[10px] md:text-sm  border-black/5 last:border-none md:py-3 py-1  md:px-5 px-2 grid grid-cols-6 text-sm gap-y-3 justify-end items-center"
           >
             <h4 className="hidden md:block">{product?.id}</h4>
             <h4>{product["Product Name"]}</h4>

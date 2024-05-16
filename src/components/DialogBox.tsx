@@ -1,20 +1,12 @@
 "use client";
-import React, { Dispatch, SetStateAction, useRef, useState } from "react";
+import React from "react";
 import InputBox from "./InputBox";
 import { IoClose } from "react-icons/io5";
-import { IProduct, productsListArr } from "@/assets/constant";
-import { FaPlus } from "react-icons/fa6";
-import { RootState } from "@/store/store";
 import { useDispatch } from "react-redux";
 import { dialogBoxClose } from "@/features/DialogBox/DialogBoxSlice";
+import { IDialogBoxProps } from "@/types/dailogBox.type";
 
-interface IDialogBoxProps {
-  handleSave: (event: React.FormEvent<HTMLFormElement>) => void;
-  setDialogBoxFormData: React.Dispatch<
-    React.SetStateAction<Partial<IProduct> | null>
-  >;
-  dialogBoxFormData: Partial<IProduct> | null;
-}
+
 function DialogBox({
   handleSave,
   dialogBoxFormData,
@@ -22,6 +14,7 @@ function DialogBox({
 }: IDialogBoxProps) {
   // redux
   const dispatch = useDispatch();
+
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
