@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,6 +17,7 @@ import DialogBox from "@/components/DialogBox";
 import { IProduct } from "@/types/ProductList.type";
 import MetamaskBox from "./MetamaskBox";
 import UserDetailBox from "./UserDetailBox";
+import { GlobalContext } from "@/context/GlobalContext";
 
 export default function RootComponent() {
   const isUserDetailBoxOpen = useSelector(
@@ -24,8 +25,7 @@ export default function RootComponent() {
   );
   const [dialogBoxFormData, setDialogBoxFormData] =
     useState<Partial<IProduct> | null>({});
-  const [selectedBoxId, setSelectedBoxId] = useState<null | number>(null);
-
+  const { selectedBoxId, setSelectedBoxId } = useContext(GlobalContext);
   // redux
   const dispatch = useDispatch();
   const boxModel = useSelector(
@@ -79,11 +79,7 @@ export default function RootComponent() {
         />
       )}
       {isUserDetailBoxOpen && <UserDetailBox />}
-      <Table
-        selectedBoxId={selectedBoxId}
-        setSelectedBoxId={setSelectedBoxId}
-        setDialogBoxFormData={setDialogBoxFormData}
-      ></Table>
+      <Table setDialogBoxFormData={setDialogBoxFormData}></Table>
     </main>
   );
 }

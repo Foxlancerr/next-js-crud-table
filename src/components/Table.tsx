@@ -3,7 +3,7 @@ import { deleteProductFromList } from "@/features/TodoListProduct/TodoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import type { IProduct } from "@/types/ProductList.type";
-import type { Dispatch, SetStateAction } from "react";
+import { useContext, type Dispatch, type SetStateAction } from "react";
 
 import DialogBox from "./DialogBox";
 
@@ -11,25 +11,19 @@ import { MdEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 import { ModelBoxOpenHandlar } from "@/features/ModelBox/ModelBoxSlice";
 import { calculateTotalAmount } from "@/utils/clipCopyText";
+import { GlobalContext } from "@/context/GlobalContext";
 
 interface ITableProps {
-  selectedBoxId: number | null;
-  setSelectedBoxId: Dispatch<SetStateAction<number | null>>;
   setDialogBoxFormData: React.Dispatch<
     React.SetStateAction<Partial<IProduct> | null>
   >;
 }
-function Table({
-  setSelectedBoxId,
-  setDialogBoxFormData,
-  selectedBoxId,
-}: ITableProps) {
+function Table({ setDialogBoxFormData }: ITableProps) {
   const dispatch = useDispatch<AppDispatch>();
   const productList = useSelector(
     (state: RootState) => state.productReducer.productsListArr
   );
-
-  
+  const { selectedBoxId, setSelectedBoxId } = useContext(GlobalContext);
 
   function onEdit(id: number) {
     dispatch(ModelBoxOpenHandlar());

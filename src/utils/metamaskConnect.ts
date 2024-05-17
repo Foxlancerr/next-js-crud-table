@@ -20,7 +20,6 @@ export const connectMetaMask = async () => {
     const networkName = network.name;
     const chainId = Number(network.chainId);
 
-    console.log(chainId, networkName, balance, address);
     return { address, networkName, chainId, balance };
   } catch (error) {
     console.log(error);

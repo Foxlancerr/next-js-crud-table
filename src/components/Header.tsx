@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import MetamaskIcon from "@/assets/icons/metamask.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { IoCopyOutline } from "react-icons/io5";
@@ -20,10 +20,12 @@ import { LuUserCircle } from "react-icons/lu";
 import { RootState } from "@/store/store";
 import { shortenEthAddress, connectMetaMask } from "@/utils/metamaskConnect";
 import { copyTextToClipboard } from "@/utils/clipCopyText";
+import { GlobalContext } from "@/context/GlobalContext";
 
 function Header() {
-  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
+  const { isCopied, isDropDownOpen, setIsDropDownOpen, setIsCopied } =
+    useContext(GlobalContext);
+
   const dispatch = useDispatch();
   const isAuthentic = useSelector(
     (state: RootState) => state.userReducer.isLogIn
@@ -121,7 +123,10 @@ function Header() {
                   </h1>
                   <h1
                     className="cursor-pointer"
-                    onClick={() => dispatch(logOutUser())}
+                    onClick={() => {
+                      dispatch(logOutUser());
+                      setIsDropDownOpen(false);
+                    }}
                   >
                     Disconnect Wallet
                   </h1>
