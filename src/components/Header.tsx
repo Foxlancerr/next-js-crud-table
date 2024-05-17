@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MetamaskIcon from "@/assets/icons/metamask.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { IoCopyOutline } from "react-icons/io5";
@@ -57,6 +57,31 @@ function Header() {
         console.log(err);
       });
   };
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        event.target instanceof Node &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setIsDropDownOpen(false);
+      }
+    };
+
+    if (isDropDownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropDownOpen]);
+
   return (
     <nav className="py-2 px-10 bg-slate-200/60 shadow-sm shadow-black/10 z-[99] sticky top-0 left-0 flex justify-between items-center">
       <h1 className="text-black font-bold">NextJs-App</h1>
@@ -81,7 +106,10 @@ function Header() {
               </h2>
 
               {isDropDownOpen && (
-                <span className=" text-sm flex gap-y-2 flex-col absolute top-6 right-0 py-2 px-3 rounded-lg w-max bg-slate-300/50">
+                <span
+                  ref={dropdownRef}
+                  className=" text-sm flex gap-y-2 flex-col absolute top-6 right-0 py-2 px-3 rounded-lg w-max bg-slate-300/50"
+                >
                   <h1
                     className="flex gap-x-2 items-center cursor-pointer"
                     onClick={handleCopyClick}
