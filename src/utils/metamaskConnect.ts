@@ -13,9 +13,15 @@ export const connectMetaMask = async () => {
   try {
     const provider = new ethers.BrowserProvider((window as any).ethereum);
     const accounts = await provider.send("eth_requestAccounts", []);
-    const account = accounts[0];
+    const address = accounts[0];
+    let balance: bigint | string = await provider.getBalance(address);
+    balance = Number(ethers.formatEther(balance)).toFixed(2);
+    const network = await provider.getNetwork();
+    const networkName = network.name;
+    const chainId = Number(network.chainId);
 
-    return account;
+    console.log(chainId, networkName, balance, address);
+    return { address, networkName, chainId, balance };
   } catch (error) {
     console.log(error);
   }

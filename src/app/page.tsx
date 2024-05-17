@@ -1,17 +1,30 @@
 "use client";
 import Header from "@/components/Header";
 import RootComponent from "@/components/RootComponent";
-import { store } from "@/store/store";
-import React from "react";
-import { Provider } from "react-redux";
+import { RootState } from "@/store/store";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-function page() {
+function HomePage() {
+  const authenticUser = useSelector((state: RootState) => state.userReducer.isLogIn);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(authenticUser)
+    if (!authenticUser) {
+      router.push("/signin");
+    }else{
+      router.push('/')
+    }
+  }, [authenticUser]);
+
   return (
-    <Provider store={store}>
-      <Header></Header>
-      <RootComponent></RootComponent>
-    </Provider>
+    <>
+      <Header />
+      <RootComponent />
+    </>
   );
 }
 
-export default page;
+export default HomePage;

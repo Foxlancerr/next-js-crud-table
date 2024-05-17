@@ -16,9 +16,11 @@ import Table from "@/components/Table";
 import DialogBox from "@/components/DialogBox";
 import { IProduct } from "@/types/ProductList.type";
 import MetamaskBox from "./MetamaskBox";
+import UserDetailBox from "./UserDetailBox";
 
 export default function RootComponent() {
-  const isMetaMaskBoxOpen = useSelector(
+  
+  const isUserDetailBoxOpen = useSelector(
     (state: RootState) => state.metaMaskBoxReducer.isBoxOpen
   );
   const [dialogBoxFormData, setDialogBoxFormData] =
@@ -78,7 +80,7 @@ export default function RootComponent() {
           handleSave={handleSave}
         />
       )}
-      {isMetaMaskBoxOpen && <MetamaskBox />}
+      {isUserDetailBoxOpen&& <UserDetailBox/>}
       <Table
         selectedBoxId={selectedBoxId}
         setSelectedBoxId={setSelectedBoxId}
