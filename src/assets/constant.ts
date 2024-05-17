@@ -13,7 +13,7 @@ export const productsListArr: IProduct[] = [
         id: 1,
         "Product Name": "Laptop",
         "category": "Electronics",
-        "price": 899,
+        price: 899,
         status: EStatus.CLOSE,
 
     },
@@ -21,7 +21,7 @@ export const productsListArr: IProduct[] = [
         id: 2,
         "Product Name": "Desk Chair",
         "category": "Furniture",
-        "price": 149,
+        price: 149,
         status: EStatus.COMPLETE,
 
     },

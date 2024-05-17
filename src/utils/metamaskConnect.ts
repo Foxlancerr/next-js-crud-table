@@ -26,3 +26,9 @@ export const connectMetaMask = async () => {
     console.log(error);
   }
 };
+
+
+export function shortenEthAddress(address: string): string {
+  if (!address) return '';
+  return `${address.slice(0, 5)}...${address.slice(-3)}`;
+}

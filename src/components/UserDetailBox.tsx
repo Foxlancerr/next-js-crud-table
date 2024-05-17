@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import FormLayout from "./FormLayout";
+import FormLayout from "./shared/FormLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { IoClose } from "react-icons/io5";

@@ -7,17 +7,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function HomePage() {
-  const authenticUser = useSelector((state: RootState) => state.userReducer.isLogIn);
-  const router = useRouter();
-
-  useEffect(() => {
-    console.log(authenticUser)
-    if (!authenticUser) {
-      router.push("/signin");
-    }else{
-      router.push('/')
-    }
-  }, [authenticUser]);
+  const isAuthentic = useSelector((state: RootState) => state.userReducer.isLogIn);
 
   return (
     <>

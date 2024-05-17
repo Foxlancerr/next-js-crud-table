@@ -4,7 +4,7 @@ import metaMaskIcon from "@/assets/icons/metamask.svg";
 import { IoClose } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { metamaskBoxCloseHandlar } from "@/features/MetamaskBox/metaMaskBoxSlice";
-import FormLayout from "./FormLayout";
+import FormLayout from "./shared/FormLayout";
 import { storeUserDetails } from "@/features/User/UserSlice";
 
 export default function MetamaskBox() {

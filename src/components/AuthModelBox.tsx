@@ -1,32 +1,19 @@
 "use client";
-import FormLayout from "@/components/FormLayout";
+import FormLayout from "@/components/shared/FormLayout";
 import MetamaskBox from "@/components/MetamaskBox";
 import { metamaskBoxCloseHandlar } from "@/features/MetamaskBox/metaMaskBoxSlice";
 import { connectMetaMask } from "@/utils/metamaskConnect";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React from "react";
 import metaMaskIcon from "@/assets/icons/metamask.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { logInUser, storeUserDetails } from "@/features/User/UserSlice";
 import { RootState } from "@/store/store";
-import { useRouter } from "next/navigation";
+import { IoClose } from "react-icons/io5";
+import { ModelBoxCloseHandlar } from "@/features/ModelBox/ModelBoxSlice";
 
 function SignInPage() {
   const dispatch = useDispatch();
-
-  const authenticUser = useSelector(
-    (state: RootState) => state.userReducer.isLogIn
-  );
-  const router = useRouter();
-
-  useEffect(() => {
-    console.log(authenticUser);
-    if (!authenticUser) {
-      router.push("/signin");
-    } else {
-      router.push("/");
-    }
-  }, [authenticUser]);
 
   const handleConnect = async () => {
     const account = await connectMetaMask();
@@ -42,6 +29,14 @@ function SignInPage() {
 
   return (
     <FormLayout>
+      <span
+        className="sm:text-4xl text-2xl cursor-pointer absolute right-5 top-5"
+        onClick={() => {
+          dispatch(ModelBoxCloseHandlar());
+        }}
+      >
+        <IoClose></IoClose>
+      </span>
       <div className="mb-2">
         <h1 className="font-bold text-lg">Connect Wallet</h1>
         <p>Choose how you want to connect wallet</p>

@@ -30,8 +30,9 @@ export const productSlice = createSlice({
         state.productsListArr[updateProductIndex] = {
           ...state.productsListArr[updateProductIndex],
           ...action.payload.productUpdatedData,
-          price: Number(state.productsListArr[updateProductIndex].price),
+          price: Number(action.payload.productUpdatedData.price),
         };
+        console.log(state.productsListArr[updateProductIndex].price)
       }
     },
     createProductAtList: (

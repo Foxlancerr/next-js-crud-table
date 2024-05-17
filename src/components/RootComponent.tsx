@@ -3,9 +3,9 @@ import { useState } from "react";
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  dialogBoxClose,
-  dialogBoxOpen,
-} from "@/features/DialogBox/DialogBoxSlice";
+  ModelBoxCloseHandlar,
+  ModelBoxOpenHandlar,
+} from "@/features/ModelBox/ModelBoxSlice";
 import {
   createProductAtList,
   updateProductAtList,
@@ -19,7 +19,6 @@ import MetamaskBox from "./MetamaskBox";
 import UserDetailBox from "./UserDetailBox";
 
 export default function RootComponent() {
-  
   const isUserDetailBoxOpen = useSelector(
     (state: RootState) => state.metaMaskBoxReducer.isBoxOpen
   );
@@ -30,7 +29,7 @@ export default function RootComponent() {
   // redux
   const dispatch = useDispatch();
   const boxModel = useSelector(
-    (state: RootState) => state.dialogBoxReducer.dialogModelBox
+    (state: RootState) => state.dialogBoxReducer.isModelBox
   );
 
   function handleSave(event: React.FormEvent<HTMLFormElement>) {
@@ -51,7 +50,7 @@ export default function RootComponent() {
       );
     }
 
-    dispatch(dialogBoxClose());
+    dispatch(ModelBoxCloseHandlar());
     setDialogBoxFormData({});
     setSelectedBoxId(null);
   }
@@ -62,8 +61,7 @@ export default function RootComponent() {
 
       <div
         onClick={() => {
-          console.log(selectedBoxId);
-          dispatch(dialogBoxOpen());
+          dispatch(ModelBoxOpenHandlar());
         }}
         className="absolute -top-4 right-0 flex gap-x-2 items-center cursor-pointer border-blue-800/10 border-[1px] bg-slate-100 px-5 py-2 rounded-full"
       >
@@ -80,7 +78,7 @@ export default function RootComponent() {
           handleSave={handleSave}
         />
       )}
-      {isUserDetailBoxOpen&& <UserDetailBox/>}
+      {isUserDetailBoxOpen && <UserDetailBox />}
       <Table
         selectedBoxId={selectedBoxId}
         setSelectedBoxId={setSelectedBoxId}
