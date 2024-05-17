@@ -20,11 +20,11 @@ import { LuUserCircle } from "react-icons/lu";
 import { RootState } from "@/store/store";
 import { shortenEthAddress, connectMetaMask } from "@/utils/metamaskConnect";
 import { copyTextToClipboard } from "@/utils/clipCopyText";
-import { GlobalContext } from "@/context/GlobalContext";
+import { GlobalContext, IGlobalState } from "@/context/GlobalContext";
 
 function Header() {
   const { isCopied, isDropDownOpen, setIsDropDownOpen, setIsCopied } =
-    useContext(GlobalContext);
+    useContext(GlobalContext) as IGlobalState;
 
   const dispatch = useDispatch();
   const isAuthentic = useSelector(

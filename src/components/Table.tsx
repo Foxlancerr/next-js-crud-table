@@ -11,7 +11,7 @@ import { MdEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 import { ModelBoxOpenHandlar } from "@/features/ModelBox/ModelBoxSlice";
 import { calculateTotalAmount } from "@/utils/clipCopyText";
-import { GlobalContext } from "@/context/GlobalContext";
+import { GlobalContext, IGlobalState } from "@/context/GlobalContext";
 
 interface ITableProps {
   setDialogBoxFormData: React.Dispatch<
@@ -23,7 +23,7 @@ function Table({ setDialogBoxFormData }: ITableProps) {
   const productList = useSelector(
     (state: RootState) => state.productReducer.productsListArr
   );
-  const { selectedBoxId, setSelectedBoxId } = useContext(GlobalContext);
+  const { selectedBoxId, setSelectedBoxId } = useContext(GlobalContext) as IGlobalState;
 
   function onEdit(id: number) {
     dispatch(ModelBoxOpenHandlar());

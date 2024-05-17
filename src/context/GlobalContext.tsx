@@ -6,7 +6,7 @@ import {
   createContext,
   useState,
 } from "react";
-interface IGlobalState {
+export interface IGlobalState {
   isDropDownOpen: Boolean;
   setIsDropDownOpen: Dispatch<SetStateAction<boolean>>;
   isCopied: boolean;

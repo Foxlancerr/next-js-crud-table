@@ -17,7 +17,7 @@ import DialogBox from "@/components/DialogBox";
 import { IProduct } from "@/types/ProductList.type";
 import MetamaskBox from "./MetamaskBox";
 import UserDetailBox from "./UserDetailBox";
-import { GlobalContext } from "@/context/GlobalContext";
+import { GlobalContext, IGlobalState } from "@/context/GlobalContext";
 
 export default function RootComponent() {
   const isUserDetailBoxOpen = useSelector(
@@ -25,7 +25,7 @@ export default function RootComponent() {
   );
   const [dialogBoxFormData, setDialogBoxFormData] =
     useState<Partial<IProduct> | null>({});
-  const { selectedBoxId, setSelectedBoxId } = useContext(GlobalContext);
+  const { selectedBoxId, setSelectedBoxId } = useContext(GlobalContext) as IGlobalState;
   // redux
   const dispatch = useDispatch();
   const boxModel = useSelector(
