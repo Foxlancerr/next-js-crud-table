@@ -1,7 +1,7 @@
 "use client";
 import FormLayout from "@/components/shared/FormLayout";
 import MetamaskBox from "@/components/MetamaskBox";
-import { metamaskBoxCloseHandlar } from "@/features/MetamaskBox/metaMaskBoxSlice";
+
 import { connectMetaMask } from "@/utils/metamaskConnect";
 import Image from "next/image";
 import React from "react";
@@ -11,6 +11,7 @@ import { logInUser, storeUserDetails } from "@/features/User/UserSlice";
 import { RootState } from "@/store/store";
 import { IoClose } from "react-icons/io5";
 import { ModelBoxCloseHandlar } from "@/features/ModelBox/ModelBoxSlice";
+import { metamaskBoxCloseHandlar } from "@/features/MetamaskBox/metaMaskBoxSlice";
 
 function SignInPage() {
   const dispatch = useDispatch();

@@ -5,10 +5,7 @@ import MetamaskIcon from "@/assets/icons/metamask.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { IoCopyOutline } from "react-icons/io5";
 
-import {
-  metamaskBoxCloseHandlar,
-  metamaskBoxOpenHandlar,
-} from "@/features/MetamaskBox/metaMaskBoxSlice";
+
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import {
   logOutUser,
@@ -19,6 +16,7 @@ import { shortenEthAddress, connectMetaMask } from "@/utils/metamaskConnect";
 import { copyTextToClipboard } from "@/utils/clipCopyText";
 import { GlobalContext, IGlobalState } from "@/context/GlobalContext";
 import MetamaskBox from "./MetamaskBox";
+import { metamaskBoxOpenHandlar } from "@/features/MetamaskBox/metaMaskBoxSlice";
 
 function Header() {
   const {
