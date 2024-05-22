@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productReducer from "@/features/TodoListProduct/TodoSlice";
 import dialogBoxReducer from "@/features/ModelBox/ModelBoxSlice";
-import metaMaskBoxReducer from "@/features/MetamaskBox/metaMaskBoxSlice";
+import metaMaskBoxReducer from "@/features/MetaMaskBox/MetamaskBoxSlice";
 import userReducer from "@/features/User/UserSlice";
 
 export const store = configureStore({

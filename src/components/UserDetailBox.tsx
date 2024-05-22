@@ -3,7 +3,7 @@ import FormLayout from "./shared/FormLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { IoClose } from "react-icons/io5";
-import { metamaskBoxCloseHandlar } from "@/features/MetamaskBox/metaMaskBoxSlice";
+import { metamaskBoxCloseHandlar } from "@/features/MetaMaskBox/MetamaskBoxSlice";
 
 function UserDetailBox() {
   const dispatch = useDispatch();
