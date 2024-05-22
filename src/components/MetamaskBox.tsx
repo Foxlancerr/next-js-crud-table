@@ -5,15 +5,30 @@ import { IoClose } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { metamaskBoxCloseHandlar } from "@/features/MetamaskBox/metaMaskBoxSlice";
 import FormLayout from "./shared/FormLayout";
-import { storeUserDetails } from "@/features/User/UserSlice";
+import { logInUser, storeUserDetails } from "@/features/User/UserSlice";
+import { useContext } from "react";
+import { GlobalContext, IGlobalState } from "@/context/GlobalContext";
 
 export default function MetamaskBox() {
   const dispatch = useDispatch();
+  const { setIsMetaMaskBoxOpen } = useContext(GlobalContext) as IGlobalState;
+
+  const handleConnect = async () => {
+    const account = await connectMetaMask();
+    if (account) {
+      alert("Connection successful: " + account.address);
+      dispatch(storeUserDetails({ user: account }));
+      dispatch(logInUser());
+    } else {
+      alert("Something went wrong");
+    }
+    setIsMetaMaskBoxOpen(false);
+  };
   return (
     <FormLayout>
       <span
         onClick={() => {
-          dispatch(metamaskBoxCloseHandlar());
+          setIsMetaMaskBoxOpen(false);
         }}
         className="sm:text-4xl text-2xl cursor-pointer absolute right-5 top-5"
       >
@@ -26,17 +41,7 @@ export default function MetamaskBox() {
 
       <h3 className="text-sm text-slate-400">Popular</h3>
       <div
-        onClick={() => {
-          connectMetaMask().then((account) => {
-            dispatch(metamaskBoxCloseHandlar());
-            if (account) {
-              dispatch(storeUserDetails({ user: account }));
-              // alert(("connection successful" + account.address) as string);
-            } else {
-              alert("Something went wrong");
-            }
-          });
-        }}
+        onClick={handleConnect}
         className={`group flex gap-x-2 flex-grow border-2 w-full p-3 bg-[#F5F7FB]  border-black/10 items-center justify-between cursor-pointer hover:bg-slate-200 rounded-md duration-150`}
       >
         <Image

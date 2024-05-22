@@ -29,7 +29,6 @@ function DialogBox({
     });
   };
 
-  console.log(dialogBoxFormData);
 
   return (
     <FormLayout>
