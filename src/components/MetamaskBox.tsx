@@ -3,7 +3,7 @@ import Image from "next/image";
 import metaMaskIcon from "@/assets/icons/metamask.svg";
 import { IoClose } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { metamaskBoxCloseHandlar } from "@/features/MetaMaskBox/MetamaskBoxSlice";
+import { metamaskBoxCloseHandlar } from "@/features/MetaMaskBox/MetaMaskBoxSlice";
 import FormLayout from "./shared/FormLayout";
 import { logInUser, storeUserDetails } from "@/features/User/UserSlice";
 import { useContext } from "react";

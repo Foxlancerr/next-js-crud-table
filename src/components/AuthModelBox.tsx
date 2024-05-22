@@ -11,7 +11,7 @@ import { logInUser, storeUserDetails } from "@/features/User/UserSlice";
 import { RootState } from "@/store/store";
 import { IoClose } from "react-icons/io5";
 import { ModelBoxCloseHandlar } from "@/features/ModelBox/ModelBoxSlice";
-import { metamaskBoxCloseHandlar } from "@/features/MetaMaskBox/MetamaskBoxSlice";
+import { metamaskBoxCloseHandlar } from "@/features/MetaMaskBox/MetaMaskBoxSlice";
 
 function SignInPage() {
   const dispatch = useDispatch();
