@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoCopyOutline } from "react-icons/io5";
 
 
-import { RiLogoutCircleRLine } from "react-icons/ri";
 import {
   logOutUser,
 } from "@/features/User/UserSlice";

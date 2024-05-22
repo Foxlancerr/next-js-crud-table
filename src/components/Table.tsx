@@ -5,7 +5,6 @@ import { AppDispatch, RootState } from "@/store/store";
 import type { IProduct } from "@/types/ProductList.type";
 import { useContext, type Dispatch, type SetStateAction } from "react";
 
-import DialogBox from "./DialogBox";
 
 import { MdEdit } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
