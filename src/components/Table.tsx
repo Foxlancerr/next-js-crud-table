@@ -23,7 +23,13 @@ function Table({ setDialogBoxFormData }: ITableProps) {
   const productList = useSelector(
     (state: RootState) => state.productReducer.productsListArr
   );
-  const { selectedBoxId, setSelectedBoxId } = useContext(GlobalContext) as IGlobalState;
+
+  const isAuthentic = useSelector(
+    (state: RootState) => state.userReducer.isLogIn
+  );
+  const { selectedBoxId, setSelectedBoxId } = useContext(
+    GlobalContext
+  ) as IGlobalState;
 
   function onEdit(id: number) {
     dispatch(ModelBoxOpenHandlar());
@@ -76,7 +82,11 @@ function Table({ setDialogBoxFormData }: ITableProps) {
                 <h4
                   className="w-max bg-green-400 text-black rounded-full p-2 text-lg hover:bg-green-800 cursor-pointer duration-100 transition-all hover:text-white"
                   onClick={() => {
-                    onEdit(index);
+                    if (isAuthentic) {
+                      onEdit(index);
+                    } else {
+                      alert("connect your metamask to perform this operation");
+                    }
                   }}
                 >
                   <MdEdit></MdEdit>
@@ -84,7 +94,11 @@ function Table({ setDialogBoxFormData }: ITableProps) {
                 <h4
                   className="w-max bg-red-400 text-black rounded-full p-2 text-lg hover:bg-red-800 cursor-pointer duration-100 transition-all hover:text-white"
                   onClick={() => {
-                    onDelete(product.id);
+                    if (isAuthentic) {
+                      onDelete(product.id);
+                    } else {
+                      alert("connect your metamask to perform this operation");
+                    }
                   }}
                 >
                   <MdDeleteOutline></MdDeleteOutline>

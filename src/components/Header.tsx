@@ -16,7 +16,7 @@ import { shortenEthAddress, connectMetaMask } from "@/utils/metamaskConnect";
 import { copyTextToClipboard } from "@/utils/clipCopyText";
 import { GlobalContext, IGlobalState } from "@/context/GlobalContext";
 import MetamaskBox from "./MetamaskBox";
-import { metamaskBoxOpenHandlar } from "@/features/MetamaskBox/metaMaskBoxSlice";
+import { metamaskBoxOpenHandlar } from "@/features/MetaMaskBox/MetaMaskBoxSlice";
 
 function Header() {
   const {

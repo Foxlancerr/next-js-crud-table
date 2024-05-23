@@ -32,6 +32,10 @@ export default function RootComponent() {
     (state: RootState) => state.dialogBoxReducer.isModelBox
   );
 
+  const isAuthentic = useSelector(
+    (state: RootState) => state.userReducer.isLogIn
+  );
+
   function handleSave(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -55,13 +59,19 @@ export default function RootComponent() {
     setSelectedBoxId(null);
   }
 
+
+
   return (
     <main className="flex justify-center bg-slate-100 rounded-sm w-[95%] md:w-4/5 mx-auto my-10 md:my-20 md:p-5 relative">
       {/* dialog box */}
 
       <div
         onClick={() => {
-          dispatch(ModelBoxOpenHandlar());
+          if(isAuthentic){
+            dispatch(ModelBoxOpenHandlar());
+          }else{
+            alert("connect to your metamask to perform this operation")
+          }
         }}
         className="absolute -top-4 right-0 flex gap-x-2 items-center cursor-pointer border-blue-800/10 border-[1px] bg-slate-100 px-5 py-2 rounded-full"
       >
