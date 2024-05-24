@@ -5,10 +5,7 @@ import MetamaskIcon from "@/assets/icons/metamask.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { IoCopyOutline } from "react-icons/io5";
 
-
-import {
-  logOutUser,
-} from "@/features/User/UserSlice";
+import { logOutUser } from "@/features/User/UserSlice";
 import { LuUserCircle } from "react-icons/lu";
 import { RootState } from "@/store/store";
 import { shortenEthAddress, connectMetaMask } from "@/utils/metamaskConnect";
@@ -16,6 +13,7 @@ import { copyTextToClipboard } from "@/utils/clipCopyText";
 import { GlobalContext, IGlobalState } from "@/context/GlobalContext";
 import MetamaskBox from "./MetamaskBox";
 import { metamaskBoxOpenHandlar } from "@/features/MetaMaskBox/MetaMaskBoxSlice";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 function Header() {
   const {
@@ -27,6 +25,9 @@ function Header() {
     setIsMetaMaskBoxOpen,
   } = useContext(GlobalContext) as IGlobalState;
 
+  const { address, isConnected } = useWeb3ModalAccount();
+  console.log(isConnected,address)
+
   const dispatch = useDispatch();
   const isAuthentic = useSelector(
     (state: RootState) => state.userReducer.isLogIn
@@ -34,8 +35,6 @@ function Header() {
   const userDetails = useSelector(
     (state: RootState) => state.userReducer.userData
   );
-
- 
 
   const handleCopyClick = () => {
     setIsDropDownOpen(false);
@@ -78,8 +77,12 @@ function Header() {
   return (
     <>
       {isMetaMaskBoxOpen && <MetamaskBox />}
-      <nav className="py-2 px-10 bg-slate-200/60 shadow-sm shadow-black/10 z-[99] sticky top-0 left-0 flex justify-between items-center">
-        <h1 className="text-black font-bold">NextJs-App</h1>
+      <nav
+      style={{
+        background:" #232B2B"
+      }}
+      className="py-2 px-10 shadow-sm z-[99] sticky top-0 left-0 flex justify-between items-center">
+        <h1 className="text-white font-bold">NextJs-App</h1>
 
         <div className="flex gap-2 items-center">
           {isCopied && (
@@ -88,7 +91,7 @@ function Header() {
             </span>
           )}
 
-          {isAuthentic ? (
+          {false ? (
             <div className="flex items-center">
               <div className="relative">
                 <h2
@@ -135,15 +138,10 @@ function Header() {
               </div>
             </div>
           ) : (
-            <button
-              onClick={() => {
-                // handleConnect();
-                setIsMetaMaskBoxOpen(true);
-              }}
-              className="py-2 px-4 bg-blue-700 font-bold text-white rounded-lg"
-            >
-              Connect wallet
-            </button>
+            // here i will used the web3Model button to show the box having differents wallets
+            <span>
+              <w3m-button />
+            </span>
           )}
         </div>
       </nav>

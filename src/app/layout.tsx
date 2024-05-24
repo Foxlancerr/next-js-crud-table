@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Web3Modal } from "@/context/web3model";
 import Header from "@/components/Header";
 import { store } from "@/store/store";
 import { Provider } from "react-redux";
@@ -28,7 +29,9 @@ export default function RootLayout({
         }}
       >
         <GlobalContextProvider>
-          <ReduxProvider>{children}</ReduxProvider>
+          <Web3Modal>
+            <ReduxProvider>{children}</ReduxProvider>
+          </Web3Modal>
         </GlobalContextProvider>
       </body>
     </html>

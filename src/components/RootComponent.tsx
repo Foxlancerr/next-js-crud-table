@@ -18,8 +18,10 @@ import { IProduct } from "@/types/ProductList.type";
 import MetamaskBox from "./MetamaskBox";
 import UserDetailBox from "./UserDetailBox";
 import { GlobalContext, IGlobalState } from "@/context/GlobalContext";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 export default function RootComponent() {
+  const { address, isConnected } = useWeb3ModalAccount();
   const isUserDetailBoxOpen = useSelector(
     (state: RootState) => state.metaMaskBoxReducer.isBoxOpen
   );
@@ -67,7 +69,7 @@ export default function RootComponent() {
 
       <div
         onClick={() => {
-          if(isAuthentic){
+          if(isConnected){
             dispatch(ModelBoxOpenHandlar());
           }else{
             alert("connect to your metamask to perform this operation")

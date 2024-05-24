@@ -11,6 +11,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { ModelBoxOpenHandlar } from "@/features/ModelBox/ModelBoxSlice";
 import { calculateTotalAmount } from "@/utils/clipCopyText";
 import { GlobalContext, IGlobalState } from "@/context/GlobalContext";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 interface ITableProps {
   setDialogBoxFormData: React.Dispatch<
@@ -18,6 +19,8 @@ interface ITableProps {
   >;
 }
 function Table({ setDialogBoxFormData }: ITableProps) {
+  const { address, isConnected } = useWeb3ModalAccount();
+  console.log(isConnected,address)
   const dispatch = useDispatch<AppDispatch>();
   const productList = useSelector(
     (state: RootState) => state.productReducer.productsListArr
@@ -81,7 +84,7 @@ function Table({ setDialogBoxFormData }: ITableProps) {
                 <h4
                   className="w-max bg-green-400 text-black rounded-full p-2 text-lg hover:bg-green-800 cursor-pointer duration-100 transition-all hover:text-white"
                   onClick={() => {
-                    if (isAuthentic) {
+                    if (isConnected) {
                       onEdit(index);
                     } else {
                       alert("connect your metamask to perform this operation");
@@ -93,7 +96,7 @@ function Table({ setDialogBoxFormData }: ITableProps) {
                 <h4
                   className="w-max bg-red-400 text-black rounded-full p-2 text-lg hover:bg-red-800 cursor-pointer duration-100 transition-all hover:text-white"
                   onClick={() => {
-                    if (isAuthentic) {
+                    if (isConnected) {
                       onDelete(product.id);
                     } else {
                       alert("connect your metamask to perform this operation");
